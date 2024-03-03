@@ -114,15 +114,6 @@ const App = () => {
   );
 };
 
-// mobile RN
-// jika direction = vertical
-// maka justify content = vertical (sumbu y)
-// dan maka align items = horizontal (sumbu x)
-
-// web
-// jika direction = horizontal
-// maka justify content = horizontal (sumbu x)
-// dan maka align items = vertikal (sumbu y)
 export default App;
 
 const styles = StyleSheet.create({
@@ -147,10 +138,4 @@ const styles = StyleSheet.create({
   btnText: {
     color: "white",
   },
-  // container: {
-  //   flex: 1,
-  //   backgroundColor: "#fff",
-  //   alignItems: "center",
-  //   justifyContent: "center",
-  // },
 });
