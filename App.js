@@ -22,6 +22,15 @@ import ScreenMain from "./screens/main/ScreenMain";
 import ScreenKaryawanList from "./screens/karyawan/ScreenKaryawanList";
 import ScreenKaryawanDetail from "./screens/karyawan/ScreenKaryawanDetail";
 import ScreenKaryawanCreate from "./screens/karyawan/ScreenKaryawanCreate";
+import ScreenPotonganList from "./screens/potongan/ScreenPotonganList";
+import ScreenPotonganCreate from "./screens/potongan/ScreenPotonganCreate";
+import ScreenPotonganDetail from "./screens/potongan/ScreenPotonganDetail";
+import ScreenJabatanCreate from "./screens/jabatan/ScreenJabatanCreate";
+import ScreenJabatanList from "./screens/jabatan/ScreenJabatanList";
+import ScreenJabatanDetail from "./screens/jabatan/ScreenJabatanDetail";
+import ScreenDepartemenList from "./screens/departemen/ScreenDepartemenList";
+import ScreenDepartemenCreate from "./screens/departemen/ScreenDepartemenCreate";
+import ScreenDepartemenDetail from "./screens/departemen/ScreenDepartemenDetail";
 
 const Stack = createStackNavigator();
 
@@ -52,36 +61,51 @@ const App = () => {
             component={ScreenKaryawanCreate}
             options={{ headerShown: false }}
           />
-          {/* <Stack.Screen
-            name="ScreenTerimaList"
-            component={ScreenTerimaList}
+          <Stack.Screen
+            name="ScreenPotonganList"
+            component={ScreenPotonganList}
             options={{ headerShown: false }}
           />
           <Stack.Screen
-            name="ScreenTerimaCreate"
-            component={ScreenTerimaCreate}
+            name="ScreenPotonganCreate"
+            component={ScreenPotonganCreate}
             options={{ headerShown: false }}
           />
           <Stack.Screen
-            name="ScreenTerimaDetail"
-            component={ScreenTerimaDetail}
+            name="ScreenPotonganDetail"
+            component={ScreenPotonganDetail}
             options={{ headerShown: false }}
           />
           <Stack.Screen
-            name="ScreenKasList"
-            component={ScreenKasList}
+            name="ScreenDepartemenList"
+            component={ScreenDepartemenList}
             options={{ headerShown: false }}
           />
           <Stack.Screen
-            name="ScreenKasCreate"
-            component={ScreenKasCreate}
+            name="ScreenDepartemenCreate"
+            component={ScreenDepartemenCreate}
             options={{ headerShown: false }}
           />
           <Stack.Screen
-            name="ScreenKasDetail"
-            component={ScreenKasDetail}
+            name="ScreenDepartemenDetail"
+            component={ScreenDepartemenDetail}
             options={{ headerShown: false }}
-          /> */}
+          />
+          <Stack.Screen
+            name="ScreenJabatanList"
+            component={ScreenJabatanList}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="ScreenJabatanCreate"
+            component={ScreenJabatanCreate}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="ScreenJabatanDetail"
+            component={ScreenJabatanDetail}
+            options={{ headerShown: false }}
+          />
           <Stack.Screen name="ScreenAbout" component={ScreenAbout} />
         </Stack.Navigator>
       </NavigationContainer>

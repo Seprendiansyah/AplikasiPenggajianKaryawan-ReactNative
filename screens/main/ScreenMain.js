@@ -17,19 +17,32 @@ const ScreenMain = ({ navigation }) => {
                 left={() => <List.Icon icon="folder" />}
                 onPress={() => navigation.navigate("ScreenKaryawanList")}
               />
-              {/* <List.Item
-              title="Kas"
-              onPress={() => navigation.navigate("ScreenKasList")}
-              left={() => <List.Icon color={MD3Colors.tertiary70} icon="folder" />}
-            /> */}
+              <List.Item
+                title="Potongan"
+                left={() => <List.Icon icon="folder" />}
+                onPress={() => navigation.navigate("ScreenPotonganList")}
+              />
+              <List.Item
+                title="Jabatan"
+                left={() => <List.Icon icon="folder" />}
+                onPress={() => navigation.navigate("ScreenJabatanList")}
+              />
+              <List.Item
+                title="Departemen"
+                onPress={() => navigation.navigate("ScreenDepartemenList")}
+                left={() => <List.Icon icon="folder" />}
+              />
             </List.Section>
-            {/* <List.Section>
-            <List.Subheader>Transaksi</List.Subheader>
-            <List.Item 
-              title="Terima Cucian" 
-              onPress={() => navigation.navigate("ScreenTerimaList")}
-              left={() => <List.Icon icon="folder" />} />
-          </List.Section> */}
+            <List.Section>
+              <List.Subheader>Penggajian</List.Subheader>
+              <List.Item
+                title="Penggajian"
+                onPress={() => navigation.navigate("ScreenPenggajianList")}
+                left={() => (
+                  <List.Icon color={MD3Colors.tertiary70} icon="folder" />
+                )}
+              />
+            </List.Section>
           </View>
         }
       />
