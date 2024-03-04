@@ -15,7 +15,7 @@ const ScreenAuthSignIn = ({ navigation, route }) => {
   const message = useMessage();
 
   const [user, setUser] = useState({
-    email: "admin@mail.com",
+    email: "admin@gmail.com",
     password: "admin",
   });
   const userValidator = useValidator({

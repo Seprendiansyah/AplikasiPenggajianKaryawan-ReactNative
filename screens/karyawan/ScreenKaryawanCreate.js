@@ -4,19 +4,22 @@ import WidgetCommonValidator from "../../widgets/commons/WidgetCommonValidator";
 import useMessage from "../../hooks/useMessage";
 import useHTTP from "../../hooks/useHTTP";
 import useJWT from "../../hooks/useJWT";
-import { useState } from "react";
+import { useState, useEffect, isFocused } from "react";
 import useValidator from "../../hooks/useValidator";
 import useChangeListener from "../../hooks/useChangeListener";
 import { BASE_URL } from "../../settings";
 import WidgetCommonHeader from "../../widgets/commons/WidgetCommonHeader";
 import WidgetCommonAuth from "../../widgets/commons/WidgetCommonAuth";
 import { ScrollView } from "react-native-gesture-handler";
+import WidgetJabatanChoice from "../../widgets/jabatan/WidgetJabatanChoice";
+import WidgetDepartemenListChoice from "../../widgets/departemen/WidgetDepartemenListChoice";
 
 const ScreenKaryawanCreate = ({ navigation }) => {
   const jwt = useJWT();
   const http = useHTTP();
   const message = useMessage();
   const changeListener = useChangeListener();
+
 
   const [karyawan, setKaryawan] = useState({
     nik: "",
@@ -33,9 +36,21 @@ const ScreenKaryawanCreate = ({ navigation }) => {
     tunjangan: 0,
   });
 
+  const [absensi, setAbsensi] = useState({
+    Hadir: 0,
+    Alpa: 0,
+    Terlambat: 0,
+  });
+
   const [departemen, setDepartemen] = useState({
     nama: "",
   });
+
+  const [potongans, daftarPotongans] = useState([]);
+
+  //daftar Jabatan
+  const [daftarJabatan, setDaftarJabatan] = useState([]);
+  const [daftarDepartemen, setDaftarDepartemen] = useState([]);
 
   const karyawanValidator = useValidator({
     nik: [],
@@ -57,6 +72,8 @@ const ScreenKaryawanCreate = ({ navigation }) => {
       const url = `${BASE_URL}/karyawan/`;
       const payload = {
         ...karyawan,
+        jabatan,
+        absensi
       };
       http.privateHTTP
         .post(url, payload, config)
@@ -73,6 +90,47 @@ const ScreenKaryawanCreate = ({ navigation }) => {
       console.log(error);
     }
   };
+  //Jabatan List
+  const onJabatanList = async (params) => {
+    try {
+      params = { ...params, limit: 4 }
+      const url = `${BASE_URL}/jabatan/`;
+      const config = {
+        headers: {
+          Authorization: await jwt.get(),
+        },
+        params
+      }
+      http.privateHTTP.get(url, config).then((response) => {
+        const { results, ...pagination } = response.data;
+        setDaftarJabatan(results)
+      }).catch((error) => {
+        console.log(error)
+        message.error(error);
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+  const callbackWidgetJabatanChoice = (item) => {
+    if (!array.isDuplicated(daftarJabatan, item, '_id')) {
+      setDaftarJabatan([...daftarJabatan, item])
+    }
+  }
+
+  const callbackWidgetDepartemenListChoice = (item) => {
+    array.removeItem(daftarDepartemen, item, '_id', setDaftarDepartemen)
+  }
+
+  useEffect(() => {
+
+    if (isFocused) {
+      onJabatanList()
+    }
+
+  }, [isFocused]);
+
+
 
   return (
     <>
@@ -84,7 +142,7 @@ const ScreenKaryawanCreate = ({ navigation }) => {
         <WidgetCommonAuth
           child={
             <>
-              {/* <Text>{JSON.stringify(karyawanValidator.result())}</Text> */}
+              <Text>{JSON.stringify(daftarJabatan)}</Text>
               <ScrollView style={styles.container}>
                 <View style={styles.wrapperControl}>
                   <TextInput
@@ -170,7 +228,7 @@ const ScreenKaryawanCreate = ({ navigation }) => {
                     messages={karyawanValidator.get("bank")}
                   />
                   <TextInput
-                    label="No.Rekening"
+                    label="Hadir"
                     autoCapitalize="none"
                     value={karyawan.no_rekening}
                     onChangeText={(text) =>
@@ -185,7 +243,56 @@ const ScreenKaryawanCreate = ({ navigation }) => {
                   <WidgetCommonValidator
                     messages={karyawanValidator.get("no_rekening")}
                   />
+                  <Text>Absensi</Text>
+                  <TextInput
+                    label="Hadir"
+                    autoCapitalize="none"
+                    value={absensi.Hadir}
+                    onChangeText={(text) =>
+                      changeListener.onChangeText(
+                        "Hadir",
+                        text,
+                        absensi,
+                        setAbsensi
+                      )
+                    }
+                  />
+                  <TextInput
+                    label="Terlambat"
+                    autoCapitalize="none"
+                    value={absensi.Terlambat}
+                    onChangeText={(text) =>
+                      changeListener.onChangeText(
+                        "Terlambat",
+                        text,
+                        absensi,
+                        setAbsensi
+                      )
+                    }
+                  />
+                  <TextInput
+                    label="Alpa"
+                    autoCapitalize="none"
+                    value={absensi.Alpa}
+                    onChangeText={(text) =>
+                      changeListener.onChangeText(
+                        "Alpa",
+                        text,
+                        absensi,
+                        setAbsensi
+                      )
+                    }
+                  />
                 </View>
+                <Text>Jabatan</Text>
+                <WidgetJabatanChoice
+                  daftarJabatan={daftarJabatan}
+                  callback={callbackWidgetJabatanChoice}
+                />
+                <Text>Departemen</Text>
+                <WidgetDepartemenListChoice
+                  callback={callbackWidgetDepartemenListChoice}
+                  daftarJabatan={daftarJabatan} />
                 <View style={styles.wrapperControl}>
                   <Button onPress={onKaryawanCreate} mode="contained">
                     Simpan

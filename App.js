@@ -31,6 +31,9 @@ import ScreenJabatanDetail from "./screens/jabatan/ScreenJabatanDetail";
 import ScreenDepartemenList from "./screens/departemen/ScreenDepartemenList";
 import ScreenDepartemenCreate from "./screens/departemen/ScreenDepartemenCreate";
 import ScreenDepartemenDetail from "./screens/departemen/ScreenDepartemenDetail";
+import ScreenPenggajianList from "./screens/penggajian/ScreenPenggajianList";
+import ScreenPenggajianCreate from "./screens/penggajian/ScreenPenggajianCreate";
+import ScreenPenggajianPrint from "./screens/penggajian/ScreenPenggajianPrint";
 
 const Stack = createStackNavigator();
 
@@ -104,6 +107,21 @@ const App = () => {
           <Stack.Screen
             name="ScreenJabatanDetail"
             component={ScreenJabatanDetail}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="ScreenPenggajianList"
+            component={ScreenPenggajianList}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="ScreenPenggajianCreate"
+            component={ScreenPenggajianCreate}
+            options={{ headerShown: false }}
+          />
+          <Stack.Screen
+            name="ScreenPenggajianPrint"
+            component={ScreenPenggajianPrint}
             options={{ headerShown: false }}
           />
           <Stack.Screen name="ScreenAbout" component={ScreenAbout} />
